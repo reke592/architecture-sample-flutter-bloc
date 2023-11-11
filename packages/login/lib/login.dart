@@ -7,3 +7,4 @@ export 'src/domain/errors/errors.dart';
 export 'src/presentation/routes.dart';
 export 'src/presentation/widgets/widgets.dart';
 export 'src/cubit/login_cubit.dart';
+export 'src/guards/guards.dart';

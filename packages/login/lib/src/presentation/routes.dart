@@ -1,6 +1,8 @@
 import 'package:ddd_commons/ddd_commons.dart';
 import 'package:flutter/material.dart';
 import 'package:login/login.dart';
+import 'package:login/src/guards/auth_guard.dart';
+import 'package:login/src/guards/login_guard.dart';
 import 'package:login/src/presentation/login_page.dart';
 
 ShellRoute configureLoginRoutes(
@@ -18,22 +20,10 @@ ShellRoute configureLoginRoutes(
       GoRoute(
         name: 'login',
         path: root,
-        redirect: (context, state) =>
-            context.read<LoginCubit>().state.data == LoginStatus.success
-                ? '$root/redirect'
-                : null,
+        redirect: loginGuard(),
         pageBuilder: (context, state) => const NoTransitionPage(
           child: LoginPage(),
         ),
-      ),
-      GoRoute(
-        path: '$root/redirect',
-        builder: (context, state) {
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            context.goNamed('dashboard');
-          });
-          return Container();
-        },
       ),
     ],
   );
