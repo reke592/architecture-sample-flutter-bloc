@@ -21,6 +21,7 @@ class AppRouter {
       GoRoute(
         name: 'dashboard',
         path: '/dashboard',
+        redirect: authGuard(),
         pageBuilder: (context, state) => const NoTransitionPage(
           child: DashboardPage(),
         ),
