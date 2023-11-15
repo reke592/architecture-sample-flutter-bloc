@@ -6,19 +6,19 @@ import 'package:todos/src/presentation/list/bloc/todo_list_bloc.dart';
 import 'package:todos/src/presentation/widgets/button_reload_todo_list.dart';
 
 class TodoListPage extends StatelessWidget {
-  final Widget child;
+  final Widget? child;
 
   const TodoListPage({
     super.key,
-    required this.child,
+    this.child,
   });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-          children: const [Text('Todos')],
+        title: const Row(
+          children: [Text('Todos')],
         ),
         leading: BackButton(onPressed: () {
           context.goNamed('dashboard');
@@ -32,8 +32,8 @@ class TodoListPage extends StatelessWidget {
               flex: 8,
               child: Column(
                 children: [
-                  Row(
-                    children: const [
+                  const Row(
+                    children: [
                       Spacer(),
                       ButtonReloadTodoList(),
                     ],
@@ -96,12 +96,14 @@ class TodoListPage extends StatelessWidget {
                 ],
               ),
             ),
-            const VerticalDivider(),
-            // form view
-            Expanded(
-              flex: 4,
-              child: child,
-            ),
+            if (child != null) ...[
+              const VerticalDivider(),
+              // form view
+              Expanded(
+                flex: 4,
+                child: child!,
+              ),
+            ]
           ],
         ),
       ),

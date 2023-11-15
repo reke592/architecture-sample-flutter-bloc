@@ -5,7 +5,7 @@ class AppThemeMcDo extends AppTheme {
   final colorRed = Colors.red.shade900;
   final colorGreen = Colors.green.shade900;
   final colorYellow = Colors.yellow.shade700;
-  final colorBlack = Colors.black87;
+  final colorBlack = Colors.black;
 
   @override
   String get themeName => 'McDo';
@@ -17,7 +17,7 @@ class AppThemeMcDo extends AppTheme {
 
   @override
   AppBarTheme get _appBarTheme => super._appBarTheme.copyWith(
-        backgroundColor: colorRed,
+        backgroundColor: colorBlack,
         foregroundColor: colorYellow,
       );
 
@@ -86,8 +86,20 @@ class AppThemeMcDo extends AppTheme {
   @override
   ProgressIndicatorThemeData get _progressIndicatorTheme =>
       super._progressIndicatorTheme.copyWith(
-            color: colorWhite,
-            circularTrackColor: colorGreen,
-            linearTrackColor: colorGreen,
+            color: colorBlack,
+            circularTrackColor: colorYellow,
+            linearTrackColor: colorYellow,
           );
+
+  @override
+  IconButtonThemeData get _iconButtonTheme => IconButtonThemeData(
+        style: IconButton.styleFrom(
+          foregroundColor: colorYellow,
+        ),
+      );
+
+  @override
+  TextTheme get _textTheme => super._textTheme.copyWith(
+        bodySmall: TextStyle(color: colorWhite),
+      );
 }

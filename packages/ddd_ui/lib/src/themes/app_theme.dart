@@ -23,6 +23,8 @@ class AppTheme {
         cardTheme: _cardTheme,
         progressIndicatorTheme: _progressIndicatorTheme,
         buttonTheme: _buttonTheme,
+        iconButtonTheme: _iconButtonTheme,
+        textTheme: _textTheme,
       );
 
   final _appBarTheme = const AppBarTheme();
@@ -69,4 +71,8 @@ class AppTheme {
   final _progressIndicatorTheme = const ProgressIndicatorThemeData();
 
   final _buttonTheme = const ButtonThemeData();
+
+  final _iconButtonTheme = const IconButtonThemeData();
+
+  final _textTheme = const TextTheme();
 }
