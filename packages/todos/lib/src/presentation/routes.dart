@@ -23,7 +23,11 @@ ShellRoute configureTodosRoutes(
           create: (context) => TodoListBloc(
             todosRepo: context.read<TodosRepository>(),
           )..add(LoadTodoList()),
-          child: TodoListPage(child: child),
+          child: MediaQuery.orientationOf(context) == Orientation.landscape
+              // display navigated route beside the list
+              ? TodoListPage(child: child)
+              // display the actual widget in page route
+              : child,
         ),
       );
     },
@@ -31,12 +35,21 @@ ShellRoute configureTodosRoutes(
       GoRoute(
         name: 'Todo List',
         path: root,
-        builder: (context, state) => Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: const [ButtonCreateTodo()],
-          ),
-        ),
+        builder: (context, state) =>
+            MediaQuery.orientationOf(context) == Orientation.landscape
+                // list is always visible
+                // display the create button beside todo list
+                ? const Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [ButtonCreateTodo()],
+                    ),
+                  )
+                // occupy the whole page
+                : const Scaffold(
+                    body: TodoListPage(),
+                    floatingActionButton: ButtonCreateTodo(),
+                  ),
       ),
       GoRoute(
         name: 'new Todo',
