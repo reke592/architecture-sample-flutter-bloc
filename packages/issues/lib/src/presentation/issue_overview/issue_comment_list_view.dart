@@ -12,6 +12,7 @@ class IssueCommentListView extends StatelessWidget {
       buildWhen: (_, current) => current.action is LoadComments,
       builder: (context, state) {
         return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (state.isLoading) const LinearProgressIndicator(),
             for (var data in state.comments) IssueCommentTile(data: data)
