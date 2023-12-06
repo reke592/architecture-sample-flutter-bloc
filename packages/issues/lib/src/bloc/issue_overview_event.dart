@@ -3,9 +3,23 @@ part of 'issue_overview_bloc.dart';
 @immutable
 abstract class IssueOverviewEvent {}
 
-class LoadComments extends IssueOverviewEvent {}
+abstract class IssueOverviewSequentialEvent extends IssueOverviewEvent {}
 
-class SubmitIssue extends IssueOverviewEvent {}
+class LoadOverview extends IssueOverviewSequentialEvent {
+  final int? id;
+  LoadOverview(this.id);
+}
+
+class LoadComments extends IssueOverviewSequentialEvent {}
+
+class SubmitIssue extends IssueOverviewEvent {
+  final String title;
+  final String description;
+  SubmitIssue({
+    required this.title,
+    required this.description,
+  });
+}
 
 class IssueSubmitted extends IssueOverviewEvent {
   final IssueReport value;

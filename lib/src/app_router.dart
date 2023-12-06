@@ -2,6 +2,7 @@ import 'package:ddd/src/dashboard/dashboard_page.dart';
 import 'package:ddd_commons/ddd_commons.dart';
 import 'package:ddd_ui/ddd_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:issues/issues.dart';
 import 'package:login/login.dart';
 import 'package:todos/todos.dart';
 
@@ -28,6 +29,7 @@ class AppRouter {
       ),
       configureLoginRoutes(rootNavigator),
       configureTodosRoutes(rootNavigator),
+      configureIssuesRoutes(rootNavigator),
     ],
   );
 }

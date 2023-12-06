@@ -39,6 +39,8 @@ dependencies:
     path: ./packages/login
   todos:
     path: ./packages/todos
+  issues:
+    path: ./packages/issues
 
 
   # The following adds the Cupertino Icons font to your application.

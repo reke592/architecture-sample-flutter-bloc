@@ -19,6 +19,7 @@ abstract class IssueRepository {
 
   // issue report
   Future<List<IssueReport>> getIssues();
+  Future<IssueReport> loadOverview(int id);
   Future<IssueReport> createIssue(IssueReport value);
   Future<IssueReport> updateIssue(IssueReport value);
 

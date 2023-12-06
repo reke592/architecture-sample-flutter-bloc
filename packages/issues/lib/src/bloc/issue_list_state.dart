@@ -1,7 +1,7 @@
 part of 'issue_list_bloc.dart';
 
 @immutable
-class IssueListState {
+class IssueListState extends Equatable {
   final BlocMutation mutation;
   final IssueListEvent? action;
   final List<IssueReport> data;
@@ -13,6 +13,14 @@ class IssueListState {
     this.data = const [],
     this.error,
   });
+
+  @override
+  List<Object?> get props => [
+        data,
+        error,
+        action,
+        mutation,
+      ];
 
   bool get isInitial => mutation == BlocMutation.initial;
   bool get isLoading => mutation == BlocMutation.loading;
