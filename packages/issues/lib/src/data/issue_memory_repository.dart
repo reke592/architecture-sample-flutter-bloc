@@ -36,7 +36,10 @@ class IssueMemoryRepository extends IssueRepository {
 
   @override
   Future<IssueReport> createIssue(IssueReport value) async {
-    final copy = value.copyWith(id: _issues.length + 1);
+    final copy = value.copyWith(
+      id: _issues.length + 1,
+      createdAt: DateTime.now(),
+    );
     _issues.add(copy);
     await Future.delayed(responseDelay);
     return copy;
