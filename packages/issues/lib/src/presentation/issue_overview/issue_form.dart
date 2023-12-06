@@ -20,6 +20,7 @@ class IssueForm extends StatefulWidget {
 class _IssueFormState extends State<IssueForm> {
   late final TextEditingController title;
   late final TextEditingController description;
+  bool loading = false;
 
   @override
   void initState() {
@@ -30,43 +31,62 @@ class _IssueFormState extends State<IssueForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        children: [
-          TextField(
-            controller: title,
-            decoration: const InputDecoration(
-              label: Text('Title'),
-            ),
-          ),
-          AppTheme.gap2,
-          TextField(
-            controller: description,
-            decoration: const InputDecoration(
-              label: Text('Description'),
-            ),
-            minLines: 5,
-            maxLines: 10,
-          ),
-          AppTheme.gap2,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+    return BlocListener<IssueOverviewBloc, IssueOverviewState>(
+      listener: (context, state) {
+        if (state.action is SubmitIssue) {
+          setState(() {
+            loading = state.isLoading;
+          });
+        }
+      },
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ElevatedButton(
-                onPressed: () {
-                  context.read<IssueOverviewBloc>().add(
-                        SubmitIssue(
-                          title: title.text,
-                          description: description.text,
-                        ),
-                      );
-                },
-                child: const Text('Save'),
+              Text(
+                'Report new Issue',
+                style: Theme.of(context).textTheme.headlineSmall,
+              ),
+              AppTheme.gap2,
+              TextField(
+                controller: title,
+                decoration: const InputDecoration(
+                  label: Text('Title'),
+                ),
+              ),
+              AppTheme.gap2,
+              TextField(
+                controller: description,
+                decoration: const InputDecoration(
+                  label: Text('Description'),
+                ),
+                minLines: 5,
+                maxLines: 10,
+              ),
+              AppTheme.gap2,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  ElevatedButton(
+                    onPressed: loading
+                        ? null
+                        : () {
+                            context.read<IssueOverviewBloc>().add(
+                                  SubmitIssue(
+                                    title: title.text,
+                                    description: description.text,
+                                  ),
+                                );
+                          },
+                    child: const Text('Submit'),
+                  ),
+                ],
               ),
             ],
           ),
-        ],
+        ),
       ),
     );
   }
