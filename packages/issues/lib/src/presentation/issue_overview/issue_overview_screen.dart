@@ -36,15 +36,19 @@ class IssueOverviewScreen extends StatelessWidget {
             ],
           ),
         ),
-        body: const Padding(
-          padding: EdgeInsets.all(8.0),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                IssueDetails(),
-                IssueCommentListView(),
-              ],
+        body: Align(
+          alignment: Alignment.topCenter,
+          child: Container(
+            padding: const EdgeInsets.all(8.0),
+            constraints: const BoxConstraints(maxWidth: 800),
+            child: const SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  IssueDetails(),
+                  IssueCommentListView(),
+                ],
+              ),
             ),
           ),
         ),
