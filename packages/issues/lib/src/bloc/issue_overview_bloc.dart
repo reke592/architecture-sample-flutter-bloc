@@ -16,9 +16,30 @@ class IssueOverviewBloc extends Bloc<IssueOverviewEvent, IssueOverviewState> {
     required IssueRepository repo,
     IssueReport? data,
   })  : _repo = repo,
-        super(IssueOverviewState(data: data ?? const IssueReport())) {
-    on<LoadComments>(_onLoadComments);
+        super(IssueOverviewState(report: data ?? const IssueReport())) {
     on<SubmitIssue>(_onSubmitIssue, transformer: restartable());
+    on<IssueOverviewSequentialEvent>(
+      (event, emit) {
+        if (event is LoadOverview) return _onLoadOverview(event, emit);
+        if (event is LoadComments) return _onLoadComments(event, emit);
+      },
+      transformer: sequential(),
+    );
+  }
+
+  FutureOr<void> _onLoadOverview(
+    LoadOverview event,
+    Emitter<IssueOverviewState> emit,
+  ) async {
+    try {
+      emit(state.loading(event));
+      final data =
+          event.id == null ? state.report : await _repo.loadOverview(event.id!);
+      emit(state.success(event, data));
+    } catch (error) {
+      emit(state.failure(event, error));
+      rethrow;
+    }
   }
 
   FutureOr<void> _onLoadComments(
@@ -27,10 +48,10 @@ class IssueOverviewBloc extends Bloc<IssueOverviewEvent, IssueOverviewState> {
   ) async {
     try {
       emit(state.loading(event));
-      final comments = await _repo.getComments(state.data);
-      emit(state.withComments(event, comments));
+      final data = await _repo.getComments(state.report);
+      emit(state.withComments(event, data));
     } catch (error) {
-      emit(state.failure(event));
+      emit(state.failure(event, error));
       rethrow;
     }
   }
@@ -41,16 +62,20 @@ class IssueOverviewBloc extends Bloc<IssueOverviewEvent, IssueOverviewState> {
   ) async {
     try {
       emit(state.loading(event));
-      final isNewRecord = state.data.id != null;
+      final request = state.report.copyWith(
+        title: event.title,
+        description: event.description,
+      );
+      final isNewRecord = state.report.id == null;
       final data = isNewRecord
-          ? await _repo.createIssue(state.data)
-          : await _repo.updateIssue(state.data);
+          ? await _repo.createIssue(request)
+          : await _repo.updateIssue(request);
       emit(state.success(event, data));
       _repo.issueOverviewEvent.add(
         IssueSubmitted(value: data, isNewRecord: isNewRecord),
       );
     } catch (error) {
-      emit(state.failure(event));
+      emit(state.failure(event, error));
       rethrow;
     }
   }

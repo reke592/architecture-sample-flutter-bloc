@@ -1,7 +1,6 @@
 library issues;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+export 'src/presentation/routes.dart';
+export 'src/domain/issues_repository.dart';
+export 'src/data/issue_memory_repository.dart';
+export 'src/presentation/widgets/issues_dashboard_shortcut.dart';
