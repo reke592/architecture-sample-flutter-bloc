@@ -5,14 +5,6 @@ part of 'issues_repository.dart';
 /// another way is to use a [BlocListener] but this approach requires a Widget context.
 abstract class IssuesDomainEvent extends Equatable {}
 
-/// reported by [IssueOverviewBloc] aflter successful loading record from data source.
-class IssueReportLoaded extends IssuesDomainEvent {
-  final IssueReport value;
-  IssueReportLoaded(this.value);
-  @override
-  List<Object?> get props => [value];
-}
-
 /// reported by [IssueOverviewBloc] after successful submit of new report.
 class IssueReportSubmitted extends IssuesDomainEvent {
   final IssueReport value;

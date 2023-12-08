@@ -28,7 +28,6 @@ class IssueOverviewBloc extends Bloc<IssueOverviewEvent, IssueOverviewState> {
       emit(state.loading(event));
       final data =
           event.id == null ? state.data : await _repo.loadOverview(event.id!);
-      _repo.domainEvent.add(IssueReportLoaded(data));
       emit(state.success(event, data));
     } catch (error) {
       emit(state.failure(event, error));
