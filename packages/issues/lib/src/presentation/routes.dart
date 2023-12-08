@@ -1,8 +1,7 @@
 import 'package:ddd_commons/ddd_commons.dart';
 import 'package:ddd_ui/ddd_ui.dart';
 import 'package:flutter/material.dart';
-import 'package:issues/src/bloc/issue_list_bloc.dart';
-import 'package:issues/src/bloc/issue_overview_bloc.dart';
+import 'package:issues/src/presentation/issue_list/bloc/issue_list_bloc.dart';
 import 'package:issues/src/domain/issues_repository.dart';
 import 'package:issues/src/presentation/issue_list/issue_list_screen.dart';
 import 'package:issues/src/presentation/issue_overview/issue_overview_screen.dart';
@@ -20,7 +19,7 @@ ShellRoute configureIssuesRoutes(
       return NoTransitionPage(
         child: BlocProvider(
           create: (context) => IssueListBloc(
-            repo: context.read<IssueRepository>(),
+            repo: context.read<IssuesRepository>(),
           )..add(LoadIssues()),
           child: child,
         ),
@@ -35,23 +34,13 @@ ShellRoute configureIssuesRoutes(
       GoRoute(
         name: 'new Issue',
         path: '$root/new',
-        builder: (context, state) => BlocProvider(
-          create: (context) => IssueOverviewBloc(
-            repo: context.read<IssueRepository>(),
-          )..add(LoadOverview(null)),
-          child: const IssueOverviewScreen(),
-        ),
+        builder: (context, state) => const IssueOverviewScreen(),
       ),
       GoRoute(
         name: 'view Issue',
         path: '$root/:id/view',
-        builder: (context, state) => BlocProvider(
-          create: (context) => IssueOverviewBloc(
-            repo: context.read<IssueRepository>(),
-          )
-            ..add(LoadOverview(int.tryParse(state.pathParameters['id'] ?? '')))
-            ..add(LoadComments()),
-          child: const IssueOverviewScreen(),
+        builder: (context, state) => IssueOverviewScreen(
+          id: int.tryParse(state.pathParameters['id'] ?? ''),
         ),
       ),
     ],

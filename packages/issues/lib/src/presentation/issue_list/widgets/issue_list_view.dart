@@ -1,8 +1,4 @@
-import 'package:ddd_commons/ddd_commons.dart';
-import 'package:ddd_ui/ddd_ui.dart';
-import 'package:flutter/material.dart';
-import 'package:issues/src/bloc/issue_list_bloc.dart';
-import 'package:issues/src/presentation/issue_list/issue_list_tile.dart';
+part of 'widgets.dart';
 
 class IssueListView extends StatelessWidget {
   const IssueListView({super.key});

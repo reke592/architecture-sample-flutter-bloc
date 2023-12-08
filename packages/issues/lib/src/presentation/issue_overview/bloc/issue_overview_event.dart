@@ -10,22 +10,11 @@ class LoadOverview extends IssueOverviewSequentialEvent {
   LoadOverview(this.id);
 }
 
-class LoadComments extends IssueOverviewSequentialEvent {}
-
 class SubmitIssue extends IssueOverviewEvent {
   final String title;
   final String description;
   SubmitIssue({
     required this.title,
     required this.description,
-  });
-}
-
-class IssueSubmitted extends IssueOverviewEvent {
-  final IssueReport value;
-  final bool isNewRecord;
-  IssueSubmitted({
-    required this.value,
-    required this.isNewRecord,
   });
 }

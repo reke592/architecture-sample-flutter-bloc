@@ -1,7 +1,6 @@
 import 'package:ddd_commons/ddd_commons.dart';
 import 'package:flutter/material.dart';
-import 'package:issues/src/presentation/issue_list/button_new_issue.dart';
-import 'package:issues/src/presentation/issue_list/issue_list_view.dart';
+import 'package:issues/src/presentation/issue_list/widgets/widgets.dart';
 
 class IssueListScreen extends StatelessWidget {
   const IssueListScreen({super.key});

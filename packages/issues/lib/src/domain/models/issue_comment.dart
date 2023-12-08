@@ -6,7 +6,7 @@ class IssueComment {
   final int? issueId;
   final Author? author;
   final String message;
-  final List<QuoteReply> quotes;
+  final QuoteReply? quoted;
   final DateTime? createdAt;
   final DateTime? modifiedAt;
 
@@ -15,7 +15,7 @@ class IssueComment {
     this.issueId,
     this.message = '',
     this.author,
-    this.quotes = const [],
+    this.quoted,
     this.createdAt,
     this.modifiedAt,
   });
@@ -25,7 +25,7 @@ class IssueComment {
     int? issueId,
     Author? author,
     String? message,
-    List<QuoteReply>? quotes,
+    QuoteReply? Function()? quoted,
     DateTime? createdAt,
     DateTime? modifiedAt,
   }) =>
@@ -34,7 +34,7 @@ class IssueComment {
         issueId: issueId ?? this.issueId,
         author: author ?? this.author,
         message: message ?? this.message,
-        quotes: quotes ?? this.quotes,
+        quoted: quoted != null ? quoted() : this.quoted,
         createdAt: createdAt ?? this.createdAt,
         modifiedAt: modifiedAt ?? this.modifiedAt,
       );

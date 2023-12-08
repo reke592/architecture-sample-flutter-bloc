@@ -1,7 +1,4 @@
-import 'package:ddd_commons/ddd_commons.dart';
-import 'package:ddd_ui/ddd_ui.dart';
-import 'package:flutter/material.dart';
-import 'package:issues/src/bloc/issue_overview_bloc.dart';
+part of 'widgets.dart';
 
 class IssueForm extends StatefulWidget {
   final String title;
