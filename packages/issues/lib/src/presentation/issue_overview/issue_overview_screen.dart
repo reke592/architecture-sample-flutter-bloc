@@ -41,6 +41,7 @@ class IssueOverviewScreen extends StatelessWidget {
           onAcceptSelectionData,
           onAcceptSelectionData,
           onLoadOverview,
+          onSubmitComment,
         ],
         child: Scaffold(
           appBar: AppBar(
