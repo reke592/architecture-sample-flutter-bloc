@@ -21,14 +21,7 @@ class CommentListBloc extends Bloc<CommentListEvent, CommentListState> {
     on<AppendNewComment>(_onAppendNewComment);
     on<ReplaceExistingComment>(_onReplaceExistingComment);
     _domainEventListener = repo.getDomainEvent().listen((event) {
-      // here we trigger to load the comments when the overview has been successfully loaded.
-      if (event is IssueReportLoaded) {
-        // we can also add validations
-        // eg. this feature can view multiple reports at the same time.
-        if (event.value.id == issueId) {
-          add(LoadComments(event.value.id));
-        }
-      } else if (event is CommentSubmitted) {
+      if (event is CommentSubmitted) {
         if (event.value.issueId == issueId) {
           if (event.isNewRecord) {
             add(AppendNewComment(event.value));

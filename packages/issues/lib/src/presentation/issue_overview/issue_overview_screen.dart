@@ -22,7 +22,6 @@ class IssueOverviewScreen extends StatelessWidget {
           )..add(LoadOverview(id)),
         ),
         BlocProvider(
-          lazy: false,
           create: (context) => CommentListBloc(
             issueId: id,
             repo: context.read<IssuesRepository>(),
@@ -41,6 +40,7 @@ class IssueOverviewScreen extends StatelessWidget {
           onSubmitIssue,
           onAcceptSelectionData,
           onAcceptSelectionData,
+          onLoadOverview,
         ],
         child: Scaffold(
           appBar: AppBar(
