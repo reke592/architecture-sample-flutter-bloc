@@ -49,7 +49,7 @@ class AppThemeMcDo extends AppTheme {
               if (states.contains(MaterialState.disabled)) {
                 return colorBlack;
               }
-              return colorWhite;
+              return colorYellow;
             },
           ),
         ),

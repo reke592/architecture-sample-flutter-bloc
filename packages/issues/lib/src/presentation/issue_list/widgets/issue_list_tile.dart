@@ -1,6 +1,4 @@
-import 'package:ddd_commons/ddd_commons.dart';
-import 'package:flutter/material.dart';
-import 'package:issues/src/domain/models/issue_report.dart';
+part of 'widgets.dart';
 
 class IssueListTile extends StatelessWidget {
   final IssueReport data;
@@ -9,9 +7,12 @@ class IssueListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isLandScape =
+        MediaQuery.orientationOf(context) == Orientation.landscape;
     return ListTile(
       title: Text(data.title),
-      trailing: Text(data.createdAt!.toIso8601String()),
+      subtitle: !isLandScape ? Text(data.createdAt!.toIso8601String()) : null,
+      trailing: isLandScape ? Text(data.createdAt!.toIso8601String()) : null,
       onTap: () {
         context.pushNamed('view Issue', pathParameters: {
           'id': data.id.toString(),

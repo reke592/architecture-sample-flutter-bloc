@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
         RepositoryProvider<TodosRepository>(
           create: (context) => TodosMemoryRepository(),
         ),
-        RepositoryProvider<IssueRepository>(
+        RepositoryProvider<IssuesRepository>(
           create: (context) => IssueMemoryRepository(),
         ),
         BlocProvider(

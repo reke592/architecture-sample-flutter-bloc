@@ -1,5 +1,4 @@
-import 'package:ddd_commons/ddd_commons.dart';
-import 'package:flutter/material.dart';
+part of 'widgets.dart';
 
 class ButtonNewIssue extends StatelessWidget {
   const ButtonNewIssue({super.key});
@@ -11,8 +10,8 @@ class ButtonNewIssue extends StatelessWidget {
         context.pushNamed('new Issue');
       },
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.greenAccent,
-        foregroundColor: Colors.black,
+        backgroundColor: Colors.green[700],
+        foregroundColor: Colors.white,
       ),
       child: const Text('Submit an Issue'),
     );

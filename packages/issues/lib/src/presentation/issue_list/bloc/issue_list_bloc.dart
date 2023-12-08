@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:ddd_commons/ddd_commons.dart';
-import 'package:issues/src/bloc/issue_overview_bloc.dart';
 import 'package:issues/src/domain/issues_repository.dart';
 import 'package:issues/src/domain/models/issue_report.dart';
 
@@ -10,17 +9,17 @@ part 'issue_list_event.dart';
 part 'issue_list_state.dart';
 
 class IssueListBloc extends Bloc<IssueListEvent, IssueListState> {
-  final IssueRepository _repo;
-  late final StreamSubscription<IssueOverviewEvent> _issueOverviewEventListener;
+  final IssuesRepository _repo;
+  late final StreamSubscription<IssuesDomainEvent> _domainEventListener;
 
-  IssueListBloc({required IssueRepository repo})
+  IssueListBloc({required IssuesRepository repo})
       : _repo = repo,
-        super(const IssueListState()) {
+        super(const IssueListInitial()) {
     on<LoadIssues>(_onLoadIssues);
     on<AddNewItem>(_onAddNewItem);
     on<ReplaceExistingItem>(_onReplaceExistingItem);
-    _issueOverviewEventListener = _repo.getIssueOverviewEvent().listen((event) {
-      if (event is IssueSubmitted) {
+    _domainEventListener = _repo.getDomainEvent().listen((event) {
+      if (event is IssueReportSubmitted) {
         if (event.isNewRecord) {
           add(AddNewItem(event.value));
         } else {
@@ -32,7 +31,7 @@ class IssueListBloc extends Bloc<IssueListEvent, IssueListState> {
 
   @override
   Future<void> close() async {
-    await _issueOverviewEventListener.cancel();
+    await _domainEventListener.cancel();
     return super.close();
   }
 
@@ -45,7 +44,7 @@ class IssueListBloc extends Bloc<IssueListEvent, IssueListState> {
       final data = await _repo.getIssues();
       emit(state.success(event, data));
     } catch (error) {
-      emit(state.failure(event));
+      emit(state.failure(event, error));
       rethrow;
     }
   }

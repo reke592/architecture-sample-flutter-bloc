@@ -8,3 +8,4 @@ export 'src/extensions/shimmer_effect_on_widget.dart';
 export 'src/widgets/widgets.dart';
 export 'src/cubit/cubit.dart';
 export 'src/beahviors/behaviors.dart';
+export 'src/bloc/text_selection_bloc.dart';
