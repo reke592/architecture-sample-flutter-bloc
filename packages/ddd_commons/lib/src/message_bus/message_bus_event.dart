@@ -5,7 +5,7 @@ part of 'message_bus.dart';
 abstract class MessageBusEvent {
   /// the object instance that submits this message
   ///
-  /// sender can later verify itself upon receiving a [MessageBusEvent] as result.
+  /// sender can later verify itself upon receiving a [MessageBusResult].
   final Object sender;
   const MessageBusEvent({required this.sender});
 }
