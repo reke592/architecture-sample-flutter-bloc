@@ -1,9 +1,6 @@
 import 'dart:async';
 
 import 'package:login/login.dart';
-import 'package:login/src/domain/errors/invalid_credentials.dart';
-import 'package:login/src/domain/errors/maximum_login_attempt.dart';
-import 'package:login/src/domain/login_repository.dart';
 
 class LoginRepositoryMemory extends LoginRepository {
   final Map<String, Timer> _lock = {};
@@ -18,6 +15,8 @@ class LoginRepositoryMemory extends LoginRepository {
       "password": "admin",
     }
   ];
+
+  LoginRepositoryMemory({required super.bus});
 
   @override
   Future<void> basicLogin({
