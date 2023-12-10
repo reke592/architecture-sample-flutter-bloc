@@ -2,11 +2,12 @@ import 'package:ddd_commons/ddd_commons.dart';
 import 'package:todos/src/domain/models/todo.dart';
 import 'package:todos/src/presentation/form/bloc/todos_form_bloc.dart';
 
-abstract class TodosRepository {
+abstract class TodosRepository extends MessageBus {
   final formEvent = PublishSubject<TodosFormEvent>();
 
-  Stream<TodosFormEvent> getFormEvent() =>
-      formEvent.stream.asBroadcastStream();
+  TodosRepository({required super.bus});
+
+  Stream<TodosFormEvent> getFormEvent() => formEvent.stream.asBroadcastStream();
 
   Future<List<Todo>> getList();
   Future<Todo> getDetails(int id);

@@ -18,15 +18,19 @@ void main() async {
   runApp(MyApp(
     router: AppRouter('/login'),
     scrollBehavior: AppScrollBehavior(),
+    bus: MessageBusRepositoryImpl(),
   ));
 }
 
 class MyApp extends StatelessWidget {
   final AppRouter router;
   final ScrollBehavior? scrollBehavior;
+  final MessageBusRepository bus;
+
   const MyApp({
     super.key,
     required this.router,
+    required this.bus,
     this.scrollBehavior,
   });
 
@@ -38,10 +42,10 @@ class MyApp extends StatelessWidget {
           create: (context) => LoginRepositoryMemory(),
         ),
         RepositoryProvider<TodosRepository>(
-          create: (context) => TodosMemoryRepository(),
+          create: (context) => TodosMemoryRepository(bus: bus),
         ),
         RepositoryProvider<IssuesRepository>(
-          create: (context) => IssueMemoryRepository(),
+          create: (context) => IssueMemoryRepository(bus: bus),
         ),
         BlocProvider(
           create: (context) => LoginCubit(

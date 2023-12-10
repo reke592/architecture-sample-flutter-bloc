@@ -56,7 +56,10 @@ class IssueMemoryRepository extends IssuesRepository {
     ),
   ];
 
-  IssueMemoryRepository({this.responseDelay = const Duration(seconds: 1)});
+  IssueMemoryRepository({
+    required super.bus,
+    this.responseDelay = const Duration(seconds: 1),
+  });
 
   @override
   Future<IssueComment> createComment(IssueComment value) async {

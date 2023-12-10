@@ -6,15 +6,32 @@ part 'message_bus_result.dart';
 
 part 'topics/employee_dropdown_option.dart';
 
-/// Global message bus mixin for repositories, facilitating communication among blocs within a bounded context.
+/// Contract for repositories utilizing global message bus to ensure consistency
+abstract class MessageBus {
+  final MessageBusRepository bus;
+  MessageBus({required this.bus});
+}
+
+/// {@template message_bus_repository}
+/// Global message bus for repositories, facilitating communication among blocs within a bounded context.
 ///
 /// usage:
 /// ```dart
-/// class HRRepository with MessageBus {
-///   late final _busEventListener = getBusEvents().listen((event) {
-///     if (event is EmployeeDropdownOptionRequest) {
+/// class HRRepositoryImpl extends HRRepository {
+///   HRRepositoryImpl({required super.bus});
+/// }
+///
+/// class ManpowerRepositoryImpl extends ManpowerRepository {
+///   HRRepositoryImpl({required super.bus});
+/// }
+///
+/// abstract class HRRepository extends MessageBus {
+///   HRRepository({required this.bus});
+///
+///   late final _busEventListener = bus.getEvents().listen((event) {
+///     if (event is EmployeeDropdownOptiequest) {
 ///       doSomething().then((result) {
-///         busResult.add(EmployeeDropdownOptionResult(
+///         bus.addResult(EmployeeDropdownOptionResult(
 ///           request: event,
 ///           value: result
 ///         ));
@@ -23,7 +40,8 @@ part 'topics/employee_dropdown_option.dart';
 ///   });
 /// }
 ///
-/// class ManpowerRepository with MessageBus {
+/// abstract class ManpowerRepository extends MessageBus {
+///   ManpowerRepository({required this.bus});
 ///   // ... etc, methods, domain event stream
 /// }
 ///
@@ -33,7 +51,7 @@ part 'topics/employee_dropdown_option.dart';
 ///   ManpowerBloc(ManpowerRepository repo) {
 ///     on<FormLoad>(_onFormLoad);
 ///     on<UseEmployeeSelection>(_onUseEmployeeSelection);
-///     _messageBusResultListener = repo.getBusResults().listen((event) {
+///     _messageBusResultListener = repo.bus.getResults().listen((event) {
 ///       if (event is EmployeeDropdownOptionResult && event.request.sender == this) {
 ///         add(UseEmployeeSelection(value: event.value));
 ///       }
@@ -41,7 +59,7 @@ part 'topics/employee_dropdown_option.dart';
 ///   }
 ///
 ///   _onFormLoad(event, emit) {
-///     _repo.busEvent.add(EmployeeDropdownOptionRequest(sender: this));
+///     _repo.bus.addEvent(EmployeeDropdownOptionRequest(sender: this));
 ///   }
 ///
 ///   _onUseEmployeeSelection(event, emit) {
@@ -52,14 +70,40 @@ part 'topics/employee_dropdown_option.dart';
 /// }
 ///
 /// ```
-mixin MessageBus on Object {
-  static final _busEvent = PublishSubject<MessageBusEvent>();
-  static final _busResult = PublishSubject<MessageBusResult>();
+/// {@endtemplate}
+abstract class MessageBusRepository {
+  Stream<MessageBusEvent> getEvents();
+  Stream<MessageBusResult> getResults();
+  void addEvent(MessageBusEvent event);
+  void addResult(MessageBusResult result);
+}
 
-  PublishSubject<MessageBusEvent> get busEvent => MessageBus._busEvent;
-  PublishSubject<MessageBusResult> get busResult => MessageBus._busResult;
+/// {@macro message_bus_repository}
+class MessageBusRepositoryImpl implements MessageBusRepository {
+  final _event = PublishSubject<MessageBusEvent>();
+  final _result = PublishSubject<MessageBusResult>();
 
-  Stream<MessageBusEvent> getBusEvents() => busEvent.stream.asBroadcastStream();
-  Stream<MessageBusResult> getBusResults() =>
-      busResult.stream.asBroadcastStream();
+  /// {@macro message_bus_repository}
+  MessageBusRepositoryImpl();
+
+  void dispose() {
+    _event.close();
+    _result.close();
+  }
+
+  @override
+  void addEvent(MessageBusEvent event) {
+    _event.add(event);
+  }
+
+  @override
+  void addResult(MessageBusResult result) {
+    _result.add(result);
+  }
+
+  @override
+  Stream<MessageBusEvent> getEvents() => _event.stream.asBroadcastStream();
+
+  @override
+  Stream<MessageBusResult> getResults() => _result.stream.asBroadcastStream();
 }
