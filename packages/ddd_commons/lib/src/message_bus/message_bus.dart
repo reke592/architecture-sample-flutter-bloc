@@ -4,8 +4,6 @@ import 'package:flutter/widgets.dart';
 part 'message_bus_event.dart';
 part 'message_bus_result.dart';
 
-part 'topics/employee_dropdown_option.dart';
-
 /// Contract for repositories utilizing global message bus to ensure consistency
 abstract class MessageBus {
   final MessageBusRepository bus;

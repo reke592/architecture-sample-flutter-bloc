@@ -1,4 +1,4 @@
-part of '../message_bus.dart';
+part of 'topics.dart';
 
 @immutable
 class EmployeeDropdownOption {
