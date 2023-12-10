@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         RepositoryProvider<LoginRepository>(
-          create: (context) => LoginRepositoryMemory(),
+          create: (context) => LoginRepositoryMemory(bus: bus),
         ),
         RepositoryProvider<TodosRepository>(
           create: (context) => TodosMemoryRepository(bus: bus),
