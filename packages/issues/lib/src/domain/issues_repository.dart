@@ -4,8 +4,10 @@ import 'package:issues/src/domain/models/issue_report.dart';
 
 part 'events.dart';
 
-abstract class IssuesRepository {
+abstract class IssuesRepository extends MessageBus {
   final domainEvent = PublishSubject<IssuesDomainEvent>();
+
+  IssuesRepository({required super.bus});
 
   Stream<IssuesDomainEvent> getDomainEvent() =>
       domainEvent.stream.asBroadcastStream();

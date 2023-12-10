@@ -12,6 +12,7 @@ class TodosMemoryRepository extends TodosRepository {
   ];
 
   TodosMemoryRepository({
+    required super.bus,
     this.responseThrottle = const Duration(seconds: 1),
   });
 
