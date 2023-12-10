@@ -3,6 +3,7 @@ import 'package:ddd_commons/ddd_commons.dart';
 import 'package:ddd_ui/ddd_ui.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:issues/issues.dart';
 import 'package:login/login.dart';
 import 'package:todos/todos.dart';
 
@@ -38,6 +39,9 @@ class MyApp extends StatelessWidget {
         ),
         RepositoryProvider<TodosRepository>(
           create: (context) => TodosMemoryRepository(),
+        ),
+        RepositoryProvider<IssuesRepository>(
+          create: (context) => IssueMemoryRepository(),
         ),
         BlocProvider(
           create: (context) => LoginCubit(

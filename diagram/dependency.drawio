@@ -1,0 +1,83 @@
+<mxfile host="65bd71144e">
+    <diagram id="rGy8gw8l3ZshkYPR-9Ce" name="Page-1">
+        <mxGraphModel dx="1066" dy="540" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="11" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="2" target="4">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="450" y="300" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="550" y="270"/>
+                            <mxPoint x="450" y="270"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="2" value="TodoList&lt;br&gt;Bloc" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="490" y="170" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="3" target="4">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="350" y="270"/>
+                            <mxPoint x="450" y="270"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="3" value="TodoForm&lt;br&gt;Bloc" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="290" y="170" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;endArrow=oval;endFill=1;" edge="1" parent="1" source="4" target="5">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="TodosDataProvider&lt;br&gt;(concrete)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="390" y="310" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="TodosRepository&lt;br&gt;(abstract)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="390" y="420" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" style="edgeStyle=none;html=1;" edge="1" parent="1" source="6" target="3">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="TodoForm&lt;br&gt;Page" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="290" y="50" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="7" target="2">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="TodoList&lt;br&gt;Page" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="490" y="50" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="17" value="reacts to" style="edgeStyle=none;html=1;endArrow=block;endFill=1;fontColor=#F0F0F0;" edge="1" parent="1" source="13" target="14">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="Presentation Layer" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontColor=#FFFF66;" vertex="1" parent="1">
+                    <mxGeometry x="75" y="65" width="120" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="18" value="depends on&lt;br&gt;and interacts with other logic &lt;br&gt;via domain event stream" style="edgeStyle=none;html=1;endArrow=block;endFill=1;fontColor=#F0F0F0;" edge="1" parent="1" source="14" target="15">
+                    <mxGeometry x="0.007" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="14" value="Logic Layer" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontColor=#FFFF66;" vertex="1" parent="1">
+                    <mxGeometry x="90" y="185" width="90" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="19" value="implements" style="edgeStyle=none;html=1;endArrow=block;endFill=1;fontColor=#F0F0F0;" edge="1" parent="1" source="15" target="16">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="Data Layer" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontColor=#FFFF66;" vertex="1" parent="1">
+                    <mxGeometry x="95" y="325" width="80" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" value="Domain Layer" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontColor=#FFFF66;" vertex="1" parent="1">
+                    <mxGeometry x="85" y="435" width="100" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="20" value="Stream&amp;lt;TodoFormEvent&amp;gt; getFormEvent()&lt;br&gt;&lt;font color=&quot;#f0f0f0&quot;&gt;Future&amp;lt;List&amp;lt;Todo&amp;gt;&amp;gt; getList()&lt;br&gt;Future&amp;lt;Todo&amp;gt; getDetails()&lt;br&gt;...&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontColor=#FFFF66;" vertex="1" parent="1">
+                    <mxGeometry x="530" y="420" width="242" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="21" value="&lt;font color=&quot;#ffff66&quot;&gt;getFormEvent().listen()&lt;/font&gt;&lt;br&gt;when: FormSubmitted&lt;br&gt;then: AppendNewItem or ReplaceExistingItem" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontColor=#F0F0F0;" vertex="1" parent="1">
+                    <mxGeometry x="620" y="170" width="270" height="60" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
