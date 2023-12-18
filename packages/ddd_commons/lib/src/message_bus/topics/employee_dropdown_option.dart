@@ -11,15 +11,16 @@ class EmployeeDropdownOption {
 }
 
 @immutable
-class EmployeeDropdownOptionRequest extends MessageBusEvent {
+class EmployeeDropdownOptionRequest
+    extends ListRequest<EmployeeDropdownOption> {
   const EmployeeDropdownOptionRequest({required super.sender});
 }
 
 @immutable
-class EmployeeDropdownOptionResult extends MessageBusResult {
-  final List<EmployeeDropdownOption> value;
+class EmployeeDropdownOptionResult
+    extends ListResponse<EmployeeDropdownOption> {
   const EmployeeDropdownOptionResult({
     required super.request,
-    required this.value,
+    required super.data,
   });
 }
